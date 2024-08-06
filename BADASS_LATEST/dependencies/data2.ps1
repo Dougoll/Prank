@@ -20,13 +20,19 @@ Set-ItemProperty -Path $regPath2 -Name "(Default)" -Value $wavFilePath4
 # Fermer toutes les fenêtre windows explorer
 (New-Object -ComObject Shell.Application).Windows() | %{$_.quit()}
 
+
+
+if ($driveLetter) {
 # Pause de 1 seconde
 Start-Sleep 1
 
+# Eject de la clé USB
 $driveEject = New-Object -comObject Shell.Application
 $driveEject.Namespace(17).ParseName("$drivePath").InvokeVerb("Eject")
 
 # Pause de 1 seconde
 Start-Sleep 1
+}
+
 
 ######Par Sébastien Langevin august 2024######
