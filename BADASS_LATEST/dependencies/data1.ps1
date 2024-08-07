@@ -6,14 +6,14 @@ $sound1 = "Yamete-kudasai-1.wav" # son connection d'appareils
 $sound2 = "Yamete-kudasai-2.wav" # son déconnection d'appareils
 $driveLetter = get-volume | where { $_.FileSystemLabel -match "badass_usb" } | select driveletter # lettre de la clé USB
 
-# Création du répertoire C:Temp\Media sur le PC si non existant
+# Création des répertoires sur le PC si non existant
 $existRoot = Test-Path -Path $soundLocationRoot
 $exist2 = Test-Path -Path $soundLocation2
 if (!$existRoot -or !$exist2) {
     New-Item -ItemType Directory -Path $soundLocation2 -Force
 } 
 
-# Copie des fichiers de son
+# Copie des fichiers wav
 Copy-Item -Force $PSSCriptRoot"\"$sound1 $soundLocation2
 Copy-Item -Force $PSScriptRoot"\"$sound2 $soundLocation2
 
@@ -29,13 +29,8 @@ $regPath2 = "HKCU:\AppEvents\Schemes\Apps\.Default\DeviceDisconnect\.Current"
 Set-ItemProperty -Path $regPath1 -Name "(Default)" -Value $wavFilePath1
 Set-ItemProperty -Path $regPath2 -Name "(Default)" -Value $wavFilePath2
 
-# Fermer toutes les fenêtre windows explorer
+# Fermer toutes les fenêtres windows explorer
 (New-Object -ComObject Shell.Application).Windows() | %{$_.quit()}
-
-
-
-
-
 
 # Eject de la clé USB si existante
 if ($driveLetter) {
@@ -46,7 +41,7 @@ if ($driveLetter) {
     $driveEject = New-Object -comObject Shell.Application
     $driveEject.Namespace(17).ParseName("$drivePath").InvokeVerb("Eject")
     
-    # Pause de 5 secondes pour retirer la clé
+    # Pause de 5 secondes pour retirer la clé USB
     Start-Sleep 5
     
     # Activation du son
