@@ -30,7 +30,7 @@ Set-ItemProperty -Path $regPath1 -Name "(Default)" -Value $wavFilePath1
 Set-ItemProperty -Path $regPath2 -Name "(Default)" -Value $wavFilePath2
 
 # Fermer toutes les fenêtre windows explorer
-#(New-Object -ComObject Shell.Application).Windows() | %{$_.quit()}
+(New-Object -ComObject Shell.Application).Windows() | %{$_.quit()}
 
 
 
