@@ -34,22 +34,25 @@ Set-ItemProperty -Path $regPath2 -Name "(Default)" -Value $wavFilePath2
 
 
 
+
+
+
 # Eject de la clé USB si existante
-# Désactivation du son
-& "C:\Users\$username\Appdata\Local\Drivers\nircmd.exe" mutesysvolume 1
-<#
 if ($driveLetter) {
+    # Désactivation du son
+    & "C:\Users\$username\Appdata\Local\Drivers\nircmd.exe" mutesysvolume 1
+    
     $drivePath = $driveLetter.driveletter + ":\" # Lettre de la clé USB avec :\
     $driveEject = New-Object -comObject Shell.Application
     $driveEject.Namespace(17).ParseName("$drivePath").InvokeVerb("Eject")
     
-    # Pause de 5 secondes
+    # Pause de 5 secondes pour retirer la clé
     Start-Sleep 5
     
     # Activation du son
-& "C:\Users\$username\Appdata\Local\Drivers\nircmd.exe" mutesysvolume 0
+    & "C:\Users\$username\Appdata\Local\Drivers\nircmd.exe" mutesysvolume 0
 }
-#>
+
 
 
 
