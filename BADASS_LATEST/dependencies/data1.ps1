@@ -1,7 +1,7 @@
 ﻿# Déclaration des variables
 $username = $env:username
-$soundLocationRoot = "C:\Users\$username\Appdata\Local\Drivers\"
-$soundLocation2 = "C:\Users\$username\Appdata\Local\Drivers\Media\" # endroit ou les fichiers sont déposé sur le PC
+$soundLocationRoot = "C:\Users\$username\Appdata\Local\Drivers\" # endroit ou les fichiers du prank sont déposés sur le PC
+$soundLocation2 = "C:\Users\$username\Appdata\Local\Drivers\Media\" # endroit ou les fichiers wav sont déposés sur le PC
 $sound1 = "Yamete-kudasai-1.wav" # son connection d'appareils
 $sound2 = "Yamete-kudasai-2.wav" # son déconnection d'appareils
 $driveLetter = get-volume | where { $_.FileSystemLabel -match "badass_usb" } | select driveletter # lettre de la clé USB
